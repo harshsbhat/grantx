@@ -12,8 +12,8 @@ const Navbar = () => {
             </div>
             <nav className="flex-1">
                 <ul className="space-y-2">
-                    <NavItem href="/dashboard" label="Dashboard" />
                     <NavItem href="/apis" label="APIs" />
+                    <NavItem href="/rootkey" label="Root Key" />
                     <NavItem href="/settings" label="Settings" />
                 </ul>
             </nav>

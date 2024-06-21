@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { Router } from 'next/router';
 
 
 const Signup = () => {
@@ -10,6 +11,7 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const router = useRouter();
 
     const handleSignup = async () => {
         if (password !== confirmPassword) {
@@ -37,7 +39,7 @@ const Signup = () => {
             setPassword('');
             setConfirmPassword('');
             setError('');
-            redirect('/dashboard');
+            router.push('/applications');
         } catch (error) {
             setError('An error occurred');
         }
