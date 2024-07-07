@@ -1,0 +1,23 @@
+{
+  "name": "grantx_sdk",
+<<<<<<< HEAD
+  "version": "1.0.7",
+=======
+  "version": "1.0.5",
+>>>>>>> e50b67abe70f27aa1f17cb97efb76a08df41cef2
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5"
+  }
+}
