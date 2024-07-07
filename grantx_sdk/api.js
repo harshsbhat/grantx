@@ -13,11 +13,7 @@ const grantx = async (key) => {
 };
 
 const apiClient = axios.create({
-<<<<<<< HEAD
     baseURL: 'https://grantx.vercel.app/api',
-=======
-    baseURL: 'http://localhost:3000/api',
->>>>>>> e50b67abe70f27aa1f17cb97efb76a08df41cef2
     headers: {
         'Content-Type': 'application/json',
     }

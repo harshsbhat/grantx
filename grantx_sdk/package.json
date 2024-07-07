@@ -1,10 +1,7 @@
 {
   "name": "grantx_sdk",
-<<<<<<< HEAD
-  "version": "1.0.7",
-=======
-  "version": "1.0.5",
->>>>>>> e50b67abe70f27aa1f17cb97efb76a08df41cef2
+  "version": "1.0.9",
+
   "description": "",
   "main": "index.js",
   "directories": {
