@@ -32,9 +32,3 @@ export async function POST(req) {
     }
 }
 
-<<<<<<< HEAD
-=======
-export async function OPTIONS() {
-    return NextResponse.json({ success: false, error: 'Method Not Allowed' }, { status: 405 });
-}
->>>>>>> e50b67abe70f27aa1f17cb97efb76a08df41cef2
