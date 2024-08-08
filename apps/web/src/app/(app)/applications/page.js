@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/app/components/Navbar';
 
+
 const Dashboard = () => {
     const [user, setUser] = useState(null);
     const [applications, setApplications] = useState([]);

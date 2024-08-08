@@ -1,9 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation'
-import { Router } from 'next/router';
-
+import { useRouter } from 'next/navigation';
 
 const Signup = () => {
     const [email, setEmail] = useState('');

@@ -8,24 +8,35 @@ export async function POST(req) {
 
   try {
     const { email, password } = await req.json();
-
     const user = await User.findOne({ email });
     if (!user || !(await user.matchPassword(password))) {
-      return NextResponse.json({ success: false, error: 'Invalid email or password' }, { status: 401 });
+      return NextResponse.json(
+        { success: false, error: 'Invalid email or password' },
+        { status: 401 }
+      );
     }
 
     const token = generateToken(user);
 
-    const response = NextResponse.json({ success: true, data: 'User logged in successfully' }, { status: 200 });
+    const response = NextResponse.json(
+      { success: true, data: 'User logged in successfully' },
+      { status: 200 }
+    );
+
     response.cookies.set('_grantX', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV !== 'development',
+      secure: process.env.NODE_ENV === 'production', // Use process.env.NODE_ENV for secure flag
+      sameSite: 'strict',
       maxAge: 3600,
       path: '/',
     });
 
     return response;
   } catch (error) {
-    return NextResponse.json({ success: false, error: 'Server Error' }, { status: 500 });
+    console.error('Login error:', error);
+    return NextResponse.json(
+      { success: false, error: 'Server Error' },
+      { status: 500 }
+    );
   }
 }
