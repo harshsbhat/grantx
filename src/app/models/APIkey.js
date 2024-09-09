@@ -51,6 +51,10 @@ const APIKeySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    whitelistedIPs: { 
+        type: Array,
+        default: [] 
+    }
 });
 
 // Indexes to improve query performance
@@ -67,6 +71,7 @@ APIKeySchema.methods.resetRequestCountIfNeeded = function() {
         this.requestCount = 0;
     }
 };
+
 
 const APIKey = mongoose.models.APIKey || mongoose.model('APIKey', APIKeySchema);
 

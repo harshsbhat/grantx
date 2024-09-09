@@ -6,6 +6,9 @@ const Modal = ({ show, onClose, onSubmit }) => {
     const [rateLimitEnabled, setRateLimitEnabled] = useState(false);
     const [rateLimit, setRateLimit] = useState(100); // Default rate limit
     const [windowDuration, setWindowDuration] = useState(15 * 60 * 1000); // Default window duration in ms (15 minutes)
+    const [whitelistEnabled, setWhitelistEnabled] = useState(false);
+    const [whitelistedIP, setWhitelistedIP] = useState('');
+    const [whitelistedIPs, setWhitelistedIPs] = useState([]);
 
     if (!show) {
         return null;
@@ -15,10 +18,22 @@ const Modal = ({ show, onClose, onSubmit }) => {
         onSubmit({
             name: name || null,
             role: role || null,
-            rateLimit: rateLimitEnabled ? rateLimit : null,
-            requestWindowMs: rateLimitEnabled ? windowDuration : null,
+            rateLimit: rateLimitEnabled ? Number(rateLimit) : null,
+            requestWindowMs: rateLimitEnabled ? Number(windowDuration) : null,
+            whitelistedIPs: whitelistEnabled ? whitelistedIPs : null,
         });
         onClose();
+    };
+
+    const handleAddIP = () => {
+        if (whitelistedIP && !whitelistedIPs.includes(whitelistedIP)) {
+            setWhitelistedIPs([...whitelistedIPs, whitelistedIP]);
+            setWhitelistedIP(''); // Clear the input field after adding
+        }
+    };
+
+    const handleRemoveIP = (ipToRemove) => {
+        setWhitelistedIPs(whitelistedIPs.filter((ip) => ip !== ipToRemove));
     };
 
     return (
@@ -74,6 +89,52 @@ const Modal = ({ show, onClose, onSubmit }) => {
                                 className="outline-none bg-gray-700 block w-full mt-1 p-2 border rounded bg-gray-700 border-gray-600 text-white"
                             />
                         </label>
+                    </>
+                )}
+                <div className="flex items-center mb-4">
+                    <label className="block mr-2">
+                        Enable Whitelisted IPs:
+                    </label>
+                    <input
+                        type="checkbox"
+                        checked={whitelistEnabled}
+                        onChange={(e) => setWhitelistEnabled(e.target.checked)}
+                        className="form-checkbox h-5 w-5 text-blue-600"
+                    />
+                </div>
+                {whitelistEnabled && (
+                    <>
+                        <label className="block mb-2">
+                            Add Whitelisted IP:
+                            <div className="flex">
+                                <input
+                                    type="text"
+                                    value={whitelistedIP}
+                                    onChange={(e) => setWhitelistedIP(e.target.value)}
+                                    placeholder="Enter IP address"
+                                    className="outline-none bg-gray-700 block w-full mt-1 p-2 border rounded bg-gray-700 border-gray-600 text-white"
+                                />
+                                <button
+                                    onClick={handleAddIP}
+                                    className="ml-2 bg-white text-black p-2 rounded"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </label>
+                        <ul className="mb-4">
+                            {whitelistedIPs.map((ip, index) => (
+                                <li key={index} className="flex justify-between items-center">
+                                    <span>{ip}</span>
+                                    <button
+                                        onClick={() => handleRemoveIP(ip)}
+                                        className="bg-red-500 text-white p-1 rounded"
+                                    >
+                                        Remove
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
                     </>
                 )}
                 <div className="flex justify-start mt-4">

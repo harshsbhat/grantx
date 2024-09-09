@@ -47,7 +47,7 @@ const ApplicationDetails = ({ params }) => {
         fetchApiKeys();
     }, [params.appId]);
 
-    const createApiKey = async ({ name, rateLimit, requestWindowMs, role }) => {
+    const createApiKey = async ({ name, rateLimit, requestWindowMs, role, whitelistedIPs}) => {
         const appId = params.appId;
         try {
             const response = await fetch(`/api/applications/createKey`, {
@@ -55,7 +55,7 @@ const ApplicationDetails = ({ params }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ appId, name, rateLimit, requestWindowMs, role }),
+                body: JSON.stringify({ appId, name, rateLimit, requestWindowMs, role, whitelistedIPs }),
             });
             const data = await response.json();
 
